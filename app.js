@@ -1,21 +1,22 @@
-const Koa = require('koa');
-const app = new Koa();
-const logger = require('koa-logger');
-// const session = require('koa-generic-session');
-
-// const co = require('co');
-const convert = require('koa-convert');
-const json = require('koa-json');
-// const onerror = require('koa-onerror');
-const bodyparser = require('koa-bodyparser')();
+const Koa = require('koa')
+const app = new Koa()
+const logger = require('koa-logger')
+// const session = require('koa-generic-session')
+// 跨域配置
+const { allowOrigin } = require('./utils/access')
+// const co = require('co')
+const convert = require('koa-convert')
+const json = require('koa-json')
+// const onerror = require('koa-onerror')
+const bodyparser = require('koa-bodyparser')()
 
 //接口
-const pcAdminRouter = require('./routes/pcAdmin');
+const pcAdminRouter = require('./routes/pcAdmin')
 
 app.use(convert(json()));
 app.use(convert(bodyparser));
 app.use(convert(logger()));
-
+app.use(allowOrigin)
 // 头部添加响应时间
 app.use(async (ctx, next) => {
   ctx.session = null;
