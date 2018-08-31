@@ -42,6 +42,7 @@ module.exports = {
           reject(err)
         }
         console.log(`${api.url}: ${JSON.stringify(data)}`)
+        
         resolve(data)
       });
     });
@@ -61,10 +62,7 @@ module.exports = {
         if(err) {
           reject(err)
         }
-        resolve({
-          response,
-          data,
-        })
+        resolve(data)
       });
     });
   },
